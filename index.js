@@ -1,7 +1,9 @@
 import "dotenv/config";
 import Freecurrencyapi from "@everapi/freecurrencyapi-js";
 
-const freecurrencyapi = new Freecurrencyapi(process.env.SECRET_KEY);
+const freecurrencyapi = new Freecurrencyapi(
+  "fca_live_a6KyVsRuCJlOsfsazhz6SWYgmhbFD5aR9z8G3oAB"
+);
 
 export async function currencyConvert(fromCurrency, toCurrency, amount) {
   const res = await freecurrencyapi.latest({
@@ -9,6 +11,5 @@ export async function currencyConvert(fromCurrency, toCurrency, amount) {
     currencies: toCurrency,
   });
   const rate = res.data[toCurrency];
-  console.log(rate * amount);
+  return rate * amount;
 }
-currencyConvert("USD", "EUR", 10);
